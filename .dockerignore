@@ -1,0 +1,13 @@
+.gcloudignore
+.git
+.gitignore
+
+# Python pycache:
+__pycache__/
+# Ignored by the build system
+/setup.cfg
+/.pytest_cache
+/.vscode
+/testes
+/venv
+app.yaml

@@ -1,0 +1,8 @@
+{% extends "base_artigos.html" %}
+{% block title %}{{ artigo.titulo|safe }}{% endblock %}
+{% block dataJson %}{{ artigo.corpo|tojson }}{% endblock %}
+{% block artigoId %}{{ artigo.id }}{% endblock %}
+{% block pushArtigo %}
+    <input class="col-12 btn-warning" type="button" value="Atualizar Artigo" onclick="updateArtigo()"
+                             style="display: none" id="ua">
+{%  endblock %}

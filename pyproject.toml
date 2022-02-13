@@ -1,0 +1,41 @@
+[tool.poetry]
+name = "hexagoon"
+version = "0.1.0"
+description = "backend app for hexagoon site"
+authors = ["Fabricio Gatto Lourençone <fa_gatto7@yahoo.com.br>"]
+license = "MIT"
+
+[tool.poetry.dependencies]
+python = "^3.8"
+fastapi = "^0.68.1"
+pymongo = "^3.12.0"
+beautifulsoup4 = "^4.10.0"
+uvicorn = "^0.15.0"
+gunicorn = "^20.1.0"
+passlib = "^1.7.4"
+bcrypt = "^3.2.0"
+PyJWT = {extras = ["crypto"], version = "^2.1.0"}
+SQLAlchemy = "^1.4.25"
+aiofiles = "^0.7.0"
+pydantic = {extras = ["email"], version = "^1.8.2"}
+motor = "^2.5.1"
+SQLAlchemy-Utils = "^0.37.9"
+factory-boy = "^3.2.0"
+Jinja2 = "^3.0.2"
+dynaconf = "^3.1.7"
+google-cloud-logging = "^2.7.0"
+pg8000 = "^1.23.0"
+
+[tool.poetry.dev-dependencies]
+pytest = "^6.2.5"
+
+[build-system]
+requires = ["poetry-core>=1.0.0"]
+build-backend = "poetry.core.masonry.api"
+
+[tool.pytest.ini_options]
+minversion = "1.0"
+testpaths = [
+    "testes"
+]
+

@@ -1,0 +1,9 @@
+GET http://0.0.0.0:8000/hexagoon/artigo/1
+Content-Type: application/json
+
+> {%
+      client.test('Ok', function() {
+          client.assert(response.status === 201, 'Not ok');
+});
+%}
+###

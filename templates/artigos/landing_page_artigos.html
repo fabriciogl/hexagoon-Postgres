@@ -1,0 +1,16 @@
+{% extends "base_artigos.html" %}
+{% block title %}Bem Vindo ao HexSaturn 🪐{% endblock %}
+{% block dataJson %}{"blocks": [{"data": {"level": 2, "text": "Bem Vindo ao HexSaturn"}, "id": "VlSDl34iWg", "type": "header"}], "time": 1636904467300, "version": "2.22.2"}{% endblock %}
+{% block listaArtigos %}
+    <ul class="list-group">
+        {% if artigos %}
+            {% for artigo in artigos %}
+                <li class="list-group-item"><a href="/hexagoon/artigo/{{ artigo.id }}">{{ artigo.titulo }}</a></li>
+            {% endfor %}
+        {% endif %}
+    </ul>
+{%  endblock %}
+{% block pushArtigo %}
+    <input class="col-12 btn-success" type="button" value="Criar Artigo" onclick="createArtigo()"
+           style="display: none" id="ua">
+{% endblock %}
