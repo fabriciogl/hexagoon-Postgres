@@ -21,3 +21,4 @@ __pycache__/
 /.vscode
 /testes
 /venv
+/banco_dados/sql_alchemy/configuracao/oracle

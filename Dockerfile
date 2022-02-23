@@ -14,7 +14,7 @@ COPY . ./
 
 
 # instal curl
-RUN apt update && apt upgrade
+# RUN apt update && apt upgrade
 RUN apt install -y curl
 
 # install poetry
