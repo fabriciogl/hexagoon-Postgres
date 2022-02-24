@@ -37,7 +37,7 @@ app.include_router(autenticacao_endpoints.router)
 app.include_router(artigo_endpoints.router)
 
 app.add_event_handler("startup", criar_tabelas)
-app.add_event_handler("startup", iniciar_gcp_logger)
+# app.add_event_handler("startup", iniciar_gcp_logger)
 
 app.add_exception_handler(InvalidIdException, invalid_id)
 

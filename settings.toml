@@ -1,7 +1,9 @@
 [default]
 root_user = ""
 root_email = ""
-sqlalchemy_database_url = ""
+db_driver = ""
+db_user = ""
+db_address = ""
 [production]
 root_user = "Fabricio Gatto Lourençone"
 root_email = "fabricio@hexsaturn.space"
