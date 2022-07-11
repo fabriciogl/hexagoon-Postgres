@@ -24,7 +24,7 @@ async function fazerLogin(){
     const email = document.querySelector('input[type=email]');
     const senha = document.querySelector('input[type=password]');
 
-    const login_response = await fetch(`https://hexagoon-ev3arw55ca-ue.a.run.app/autenticacao`, {
+    const login_response = await fetch(`http://0.0.0.0:8000/autenticacao`, {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'
@@ -224,7 +224,7 @@ async function updateArtigo(){
         return
     }
 
-    const artigo_response = await fetch(`https://hexagoon-ev3arw55ca-ue.a.run.app/artigo/${id}`, {
+    const artigo_response = await fetch(`http://0.0.0.0:8000/artigo/${id}`, {
         method: 'PUT',
         headers: {
             'Content-Type': 'application/json',
@@ -244,7 +244,7 @@ async function createArtigo(){
     const savedData = await editor.save();
     const token = localStorage.getItem("jwt");
 
-    const artigo_response = await fetch(`https://hexagoon-ev3arw55ca-ue.a.run.app/artigo`, {
+    const artigo_response = await fetch(`http://0.0.0.0:8000/artigo`, {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
