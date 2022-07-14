@@ -42,7 +42,7 @@ hash_2 = "HS256"
 
 --> install postgres with docker
 
-``` docker pull postgres:13```
+``` docker pull postgres:latest```
 
 ## 6
 
