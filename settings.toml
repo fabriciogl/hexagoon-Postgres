@@ -1,24 +1,28 @@
 [default]
 root_user = ""
 root_email = ""
+root_role = "root"
 db_driver = ""
 db_user = ""
 db_address = ""
 [production]
 root_user = "Fabricio Gatto Lourençone"
 root_email = "fabricio@hexsaturn.space"
+root_role = "root"
 db_driver = "postgresql+pg8000://"
 db_user = "postgres"
 db_address = "/hexagoon?unix_sock=/cloudsql/hexsaturn:us-east1:db-hexagoon/.s.PGSQL.5432"
 [development]
 root_user = "Fabricio Gatto Lourençone"
 root_email = "fabricio@hexsaturn.space"
+root_role = "root"
 db_driver = "postgresql+pg8000://"
 db_user = "postgres"
 db_address = "0.0.0.0:5432/hexagoon"
 [testing]
 root_user = "Fabricio Gatto Lourençone"
 root_email = "fabricio@hexsaturn.space"
+root_role = "root"
 db_driver = "postgresql+pg8000://"
 db_user = "postgres"
 db_address = "0.0.0.0:5432/hexagoon_test"

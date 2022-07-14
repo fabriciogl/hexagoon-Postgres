@@ -56,6 +56,37 @@
                 <td colspan="2" id="ua{{ usuario.id }}">{{ 'Sim' if usuario.ativo else 'Não'}}</td>
             </tr>
             <tr>
+                <td>Perfis Atuais</td>
+                {% set list_roles = usuario.a_roles|map(attribute='role.sigla')|join(' ') %}
+                <td colspan="2" id="p{{ usuario.id }}">{{ list_roles }}</td>
+            </tr>
+            <tr>
+                <td>Adicionar Perfis</td>
+                <td>
+                    <select name="perfisAdicionar" id="psa{{ usuario.id }}">
+                        {% for perfil in perfis %}
+                        <option value="{{ perfil.id }}" id="op{{ perfil.id }}">{{ perfil.sigla }}</option>
+                        {% endfor %}
+                    </select>
+                </td>
+                <td>
+                    <input type="submit" id="pa{{ usuario.id }}" onclick="adicionarPerfil()" value="Adicionar Perfil" class="btn-success">
+                </td>
+            </tr>
+            <tr>
+                <td>Remover Perfis</td>
+                <td>
+                    <select name="perfisRemover" id="psr{{ usuario.id }}">
+                        {% for a_role in usuario.a_roles %}
+                        <option value="{{ a_role.id }}">{{ a_role.role.sigla }}</option>
+                        {% endfor %}
+                    </select>
+                </td>
+                <td>
+                    <input type="submit" id="pr{{ usuario.id }}" onclick="excluirPerfil()" value="Remover Perfil" class="btn-warning">
+                </td>
+            </tr>
+            <tr>
                 <td>Criado Em</td>
                 <td colspan="2">{{ usuario.criado_em|timeformat if usuario.criado_em else ''}}</td>
             </tr>

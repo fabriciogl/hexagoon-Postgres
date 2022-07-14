@@ -5,7 +5,7 @@ from typing import Optional, List
 
 from pydantic import BaseModel, EmailStr
 
-from api.v1.role.model.role_model import RoleOutModel
+from api.v1.role.model.role_model import RoleOut
 
 
 class UsuarioIn(BaseModel):
@@ -23,7 +23,7 @@ class UsuarioTokenIn(BaseModel):
 
 class UsuarioOut(BaseModel):
     class AsRole(BaseModel):
-        role: RoleOutModel
+        role: RoleOut
         criado_em: datetime
 
         class Config:

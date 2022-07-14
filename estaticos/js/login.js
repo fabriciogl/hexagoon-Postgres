@@ -6,7 +6,6 @@ async function logarUsuario(){
 
     const email = document.querySelector('#email').value;
     const senha = document.querySelector('#senha').value;
-
     const login_response = await fetch(`http://0.0.0.0:8000/hexagoon/administration`, {
         method: 'POST',
         headers: {

@@ -5,7 +5,7 @@ from typing import Optional
 
 from pydantic import BaseModel, EmailStr
 
-from api.v1.role.model.role_model import RoleOutModel
+from api.v1.role.model.role_model import RoleOut
 from api.v1.usuario.model.usuario_model import UsuarioOutReduzido
 
 
@@ -27,7 +27,7 @@ class AsUsuarioRoleOut(BaseModel):
 
     id: int
     usuario: UsuarioOutReduzido
-    role: RoleOutModel
+    role: RoleOut
     criado_em: datetime
 
     class Config:

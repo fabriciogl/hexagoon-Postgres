@@ -5,7 +5,7 @@ from typing import Optional, List
 
 from pydantic import BaseModel
 
-from api.v1.role.model.role_model import RoleOutModel
+from api.v1.role.model.role_model import RoleOut
 
 
 class AutenticacaoIn(BaseModel):
@@ -19,7 +19,7 @@ class AutenticacaoIn(BaseModel):
 class AutenticacaoOut(BaseModel):
     token: Optional[str]
     exp: Optional[datetime]
-    roles: Optional[List[RoleOutModel]]
+    roles: Optional[List[RoleOut]]
 
     class Config:
         orm_mode = True

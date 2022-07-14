@@ -20,6 +20,12 @@ window.onload = async function(e){
 
 };
 
+async function showLogin(){
+    document.querySelector('input[type=email]').style.display = 'block';
+    document.querySelector('input[type=password]').style.display = 'block';
+    document.querySelector('input[value=Logar]').style.display = 'block';
+};
+
 async function fazerLogin(){
     const email = document.querySelector('input[type=email]');
     const senha = document.querySelector('input[type=password]');
@@ -59,6 +65,9 @@ async function fazerLogin(){
         senha.style.display = 'none';
         email.style.display = 'none';
         document.querySelector('input[value=Logar]').style.display = 'none';
+
+        document.querySelector('#ua').style.display = 'block';
+        document.querySelector('#pa').style.display = 'block';
     }
 }
 
@@ -163,12 +172,12 @@ async function readOnlyArtigo(){
 
     let proteger = document.querySelector('#pa');
 
-    if (proteger.getAttribute('protected') === 'false'){
+    if (proteger.getAttribute('data-protected') === 'false'){
         proteger.setAttribute('value', 'Proteger Artigo');
-        proteger.setAttribute('protected', 'true');
+        proteger.setAttribute('data-protected', 'true');
     } else {
         proteger.setAttribute('value', 'Desproteger Artigo');
-        proteger.setAttribute('protected', 'false');
+        proteger.setAttribute('data-protected', 'false');
     }
 
     editor.readOnly.toggle();

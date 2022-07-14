@@ -3,13 +3,13 @@
 from sqlalchemy import select
 
 from api.v1.recursos.acoes_initiallizer import AcoesInitiallizer
-from api.v1.role.model.role_model import RoleInModel
+from api.v1.role.model.role_model import RoleIn
 from banco_dados.sql_alchemy.configuracao.data_schema import Role as RoleData
 
 
 class RoleAcoes(AcoesInitiallizer):
     # declara o tipo do model
-    model: RoleInModel
+    model: RoleIn
     data: RoleData
 
     def acao_0(self):

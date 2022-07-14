@@ -30,32 +30,41 @@
 
 <div class="container">
     <div class="row">
-        <input class="col-3" type="email" placeholder="email" style="display: none">
-        <input class="col-3" type="password" placeholder="senha" style="display: none">
-        <input class="col-1" type="button" value="Logar" onclick="fazerLogin()" style="display: none">
+        <div class="col-1 pb-2">
+            <img
+                 src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEAAAABACAYAAACqaXHeAAAABHNCSVQICAgIfAhkiAAAAAlwSFlzAAAB2AAAAdgB+lymcgAAABl0RVh0U29mdHdhcmUAd3d3Lmlua3NjYXBlLm9yZ5vuPBoAAAO6SURBVHic7Zs9iBRnGMd/78fcXhQtxBCPCH7uKUggYBNIYSEBLQSLeDYxGBWPnPdhCFyb5dBLEfA8sLj1o0hSxI80IY2tVhZpUkSJhCDcR0gRY0A9d3ZmXotN4rq7s7uzM7PvfcwPtpmZ93n/+9/dZwb2/whs8fDSB/j+t2ActD5BfvgHGzJE13e8f2kLOrhOyXvvteM96gFr1WE2Dz/sppzuGWAKkvm+YzwtzVD2ehurEQatbuFvOsaeAbcbsrpjwOzlfQhzEXgXgLIPiy74QePrlSyh9AS7hifTlpauAXNXNkMwCXxUt5cBXA9euBCYxuu1+hMtjpIfvZOWxHQMWCiuwWccwTjwRtNrjYEX5cqrIQIc9TO9uYNsHfwjaanJGmCMYP7yh8BXwJZIawNT+Vm4XuPzUvpo9R39f32CKIRcFJ3kDFi4spfATIN5P1ad1v3hGVp+Tv9oMdY+/xLfgEfFPjQF4BQgY9f7D9erGBHWHxw1R845wrahe3G26dyAX272sP7Jp2AmEKyPIyIUA5RcWAzrD4Cj7pALDrPtsyedbNGZAfMzhzDiIrC9o/VRCYKKCaH9Qfg48hr9Y4NRS0czYKG4G8MUhgNRN0oEz4fnzfqD+htHDpIfudVuyfYMmL26Ael/gWEI0O0WTw3XqxhhwvqD/B0lD5Efvd+qVHMDTEEz33cCOA9s7EBqehgDpTIselSaRQ1CGBx1G08NsOfM07Ay4QbMzewHMQW8k4Dc9Gj1/KCEi9Jfsmuk0Oh0vQGzV3ci/EngSIIy08fzK43S8xuf1/IxOXmc7aM/Vh+uv2+LYJrl9uYBtIJ1vbA2B6LBF9sLNlAy1+qWdUNbV+nR4Kjm/aGK5J7clhJCQG8P5Fp/vivTgAhkBtgWYJvMANsCbJMZYFuAbTIDbAuwTWaAbQG2yQywLcA2mQG2BdgmM8C2ANtkBtgWYJvMANsCbJMZYFuAbTIDbAuwTWaAbQG2WXl/jsKr8ESpdZxw5RnQKj5TQ70BRo4h/Gcst4yAF8DzUniASsvH5MTJ2sNZRKZp8VchqXPAm/GUJkzLkJQ0ODJGSKqapRiTaxqjTSomV8tCcTcBF4CDkdYlRVtBSX2a/Jnv2y0ZJyo7BezoaH1UlkxUtpqfig5viaF0w9KthimwFJauZtXG5WtZtQMT1cQZmfGDyld92Y7MVLNqh6ZqSWJsTpkB+s/eTUtiNjiZ9gb/s6pHZ6v59eu34Z8buN7rd4sVPzxdy2/TByjzDQAOH7Nz7LYNGS8BWyOXCKy3HFoAAAAASUVORK5CYII="
+                 alt=""
+                 width="60"
+                 height="60"
+                 onclick="showLogin()"
+            >
+        </div>
+        <div class="col-3 my-auto">
+            <input type="email" placeholder="email" style="display: none">
+        </div>
+        <div class="col-3 my-auto">
+            <input type="password" placeholder="senha" style="display: none">
+        </div>
+        <div class="col-1 my-auto">
+            <input type="button" value="Logar" onclick="fazerLogin()" style="display: none">
+        </div>
+    <div class="row">
         <div class="col-5"></div>
     </div>
 </div>
 
 <div id="navigation" class="container">
     <div class="row">
-        <div class="col-2">
-            <div class="text-center">
-                <div class="row">
-                    {% block pushArtigo %} {% endblock %}
-                    <input class="col-12 btn-outline-secondary" type="button" value="Desproteger Artigo" onclick="readOnlyArtigo()"
-                           style="display: none" id="pa" protected="false">
-                </div>
-                <div class="col-12" id="alert"></div>
-            </div>
+        <div class="col-2 px-2">
+            {% block pushArtigo %} {% endblock %}
+            <input class="col-12 btn-outline-secondary" type="button" value="Desproteger Artigo" onclick="readOnlyArtigo()"
+                   style="display: none" id="pa" data-protected="false">
+            <div class=>{% block listaArtigos %}{% endblock %}</div>
         </div>
-        <div class="card col-8">
+        <div class="card col-10 px-2">
             <div class="card-text">
                 <div id="editorjs"></div>
             </div>
-        </div>
-        <div class="col-2">
-            <div class=>{% block listaArtigos %}{% endblock %}</div>
         </div>
     </div>
 </div>

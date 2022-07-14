@@ -8,7 +8,7 @@ from config import settings
 def load_data(session):
 
     # cria usuário root
-    role_root = Role(sigla='root', descricao='acesso com poder de superusuário')
+    role_root = Role(sigla=settings.root_role, descricao='acesso com poder de superusuário')
     as_role_usuario = AsUsuarioRole()
     as_role_usuario.role = role_root
     usuario = Usuario(

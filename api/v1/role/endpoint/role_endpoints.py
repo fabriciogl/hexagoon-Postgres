@@ -6,7 +6,7 @@ from fastapi.params import Security
 from api.v1.recursos.response_handler import ResponseHandler
 from api.v1.recursos.validations.token_role_validation import valida_role
 from api.v1.role.acoes.role_acoes import RoleAcoes
-from api.v1.role.model.role_model import RoleOutModel, RoleInModel
+from api.v1.role.model.role_model import RoleOut, RoleIn
 from api.v1.role.regras.role_regras import RoleRegras
 
 router = APIRouter(
@@ -20,7 +20,7 @@ class RoleEndpoints:
     @staticmethod
     @router.get(
         "/{_id}",
-        response_model=RoleOutModel
+        response_model=RoleOut
     )
     async def find(
             _id: int,
@@ -37,11 +37,11 @@ class RoleEndpoints:
     @staticmethod
     @router.post(
         "",
-        response_model=RoleOutModel,
+        response_model=RoleOut,
         status_code=201
     )
     async def create(
-            model: RoleInModel,
+            model: RoleIn,
             handler: ResponseHandler = Security(valida_role, scopes=["root", "admin"])
     ):
         # valida as regras necessárias no model
@@ -55,10 +55,10 @@ class RoleEndpoints:
     @router.put(
         "/{_id}",
         status_code=200,
-        response_model=RoleOutModel
+        response_model=RoleOut
     )
     async def update(
-            model: RoleInModel,
+            model: RoleIn,
             _id: int,
             handler: ResponseHandler = Security(valida_role, scopes=["root", "admin"])
     ):

@@ -9,7 +9,7 @@ from api.v1.autenticacao.endpoint.autenticacao_endpoints import AutenticacaoEndp
 from api.v1.recursos.acoes_initiallizer import AcoesInitiallizer
 from api.v1.recursos.basic_exceptions.sql_exceptions import SQLException
 from api.v1.usuario.model.usuario_model import UsuarioOut
-from banco_dados.sql_alchemy.configuracao.data_schema import Usuario, Artigo
+from banco_dados.sql_alchemy.configuracao.data_schema import Usuario, Artigo, Role
 from templates.Jinja2 import create_templates
 
 templates = create_templates()
@@ -34,25 +34,30 @@ class HTMLAcoes(AcoesInitiallizer):
         """ use : [admin_1] """
 
         try:
-            if data := self.handler\
-                    .sessao\
-                    .query(Usuario)\
+            if data := self.handler \
+                    .sessao \
+                    .query(Usuario) \
                     .options(
-                        joinedload(
-                            Usuario.criado_por
-                        ),
-                        joinedload(
-                            Usuario.alterado_por
-                        ),
-                        joinedload(
-                            Usuario.deletado_por
-                        )
-                    )\
+                joinedload(
+                    Usuario.criado_por
+                ),
+                joinedload(
+                    Usuario.alterado_por
+                ),
+                joinedload(
+                    Usuario.deletado_por
+                ),
+                joinedload(
+                    Usuario.a_roles
+                )
+            ) \
                     .all():
                 self.data = data
 
         except NoResultFound:
             raise SQLException('Não há objetos do tipo usuário.')
+
+        perfis: Role = self.handler.sessao.query(Role).all()
 
         self.model: UsuarioOut = self.data
 
@@ -60,7 +65,8 @@ class HTMLAcoes(AcoesInitiallizer):
             "usuarios.html",
             {
                 "request": self.handler.request,
-                "usuarios": self.data
+                "usuarios": self.data,
+                "perfis": perfis
             }
         )
 
@@ -77,11 +83,19 @@ class HTMLAcoes(AcoesInitiallizer):
 
         self.data = self.handler.sessao.execute(select_query).scalar_one()
 
+        # forma de se recuperar somente algumas colunas da tabela
+        select_query = select(Artigo.id, Artigo.titulo)
+
+        artigos = ''  # inicializa a variável
+        if data := self.handler.sessao.execute(select_query).fetchall():
+            artigos = [Artigo(id=a[0], titulo=a[1]) for a in data]
+
         self.handler.sucesso = templates.TemplateResponse(
             "artigos/artigo_individual.html",
             {
                 "request": self.handler.request,
-                "artigo": self.data
+                "artigo": self.data,
+                "artigos": artigos
             }
         )
 

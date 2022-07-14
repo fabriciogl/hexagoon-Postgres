@@ -140,3 +140,62 @@ async function submeterUsuario(){
         document.querySelector('#navigation').appendChild(user_clone);
     }
 }
+
+async function adicionarPerfil(){
+    const id = window.event.target.id.replace('pa', '');
+    const role_id = document.querySelector(`#psa${id}`).selectedOptions[0].value;
+    const token = localStorage.getItem("jwt");
+
+    const response = await fetch(`http://0.0.0.0:8000/as_usuario_role/`, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${token}`
+        },
+        body: JSON.stringify({
+            "usuario_id": id,
+            "role_id": role_id
+        })
+    });
+
+    if (!response.ok) {
+        const message = `Um erro ocorreu ${response.status}`;
+        throw new Error(message);
+    }
+    if (response.status === 201){
+        // adiciona o perfil na lista de perfis
+        const perfis = document.querySelector(`#p${id}`);
+        perfis.innerText = perfis.innerText + " " + document.querySelector(`#psa${id}`).selectedOptions[0].innerText;
+
+        // alterar o id do perfil na opção para pode ser excluído/adicionado novamente.
+//        const opcaoPerfil = document.querySelector(`select[name=perfisRemover] option[#psr${id}`);
+//        opcaoPerfil.value = response['role_id'];
+//        opcaoPerfil.id = `op${response['role_id']}`;
+
+    }
+
+}
+
+async function excluirPerfil(){
+    const id = window.event.target.id.replace('pr', '');
+    const role_id = document.querySelector(`#psr${id}`).selectedOptions[0].value;
+    const token = localStorage.getItem("jwt");
+
+    const response = await fetch(`http://0.0.0.0:8000/as_usuario_role/${role_id}`, {
+        method: 'DELETE',
+        headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${token}`
+        }
+    });
+
+    if (!response.ok) {
+        const message = `Um erro ocorreu ${response.status}`;
+        throw new Error(message);
+    }
+    if (response.status === 200){
+        const perfis = document.querySelector(`#p${id}`);
+        perfis.innerText = perfis.innerText.replace(document.querySelector(`#psr${id}`).selectedOptions[0].innerText, "");
+    }
+
+}

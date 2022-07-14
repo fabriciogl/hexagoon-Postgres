@@ -46,14 +46,14 @@ class RegrasInitiallizer(ABC):
         """metodo que cria a lista de regras de cada classe instaciada de regras
            e salva em um dicionario criado na classe instaciada"""
         if not hasattr(cls, 'rules'):
-            # cria um atributo na classe instaciada, chamado 'action'
+            # cria um atributo na classe instaciada, chamado 'rules'
             setattr(cls, 'rules', {})
-            # caso não tenha, aloca as acoes e metodos de forma ordenada
+            # caso não tenha, aloca as regras e metodos de forma ordenada
             for name, method in inspect.getmembers(cls, predicate=inspect.isfunction):
                 doc_string = method.__doc__ if method.__doc__ else '' # evita erro de metodo/funcao sem docstring
                 use_cases: t_re.Match = re.search(r'(?P<use>use\s{,4}[:=]{1,2}\s{,4}\[.*])', doc_string, flags=re.IGNORECASE)
                 if use_cases and use_cases.group('use'):
-                    # identifica todas as acoes declaradas na funcao
+                    # identifica todas as regras declaradas na funcao
                     list_uses = re.findall(r'\w*\d', use_cases.group('use'))
                     for use_order in list_uses:
                         use, order = use_order.split('_')
@@ -63,6 +63,6 @@ class RegrasInitiallizer(ABC):
                             .setdefault(use, []) \
                             .append((int(order), method))
 
-            # ordena a lista de metodos de cada action
+            # ordena a lista de metodos de cada regra
             for rule in cls.rules:
                 cls.rules[rule].sort(key=itemgetter(0))
