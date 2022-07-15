@@ -1,6 +1,6 @@
 #  Copyright (c) 2022. Hexagoon. Criador: Fabricio Gatto Lourençone. Todos os direitos reservados.
 
-from sqlalchemy import select
+from sqlalchemy import select, asc
 from sqlalchemy.exc import NoResultFound
 from sqlalchemy.orm import joinedload
 from starlette.responses import Response
@@ -84,7 +84,7 @@ class HTMLAcoes(AcoesInitiallizer):
         self.data = self.handler.sessao.execute(select_query).scalar_one()
 
         # forma de se recuperar somente algumas colunas da tabela
-        select_query = select(Artigo.id, Artigo.titulo)
+        select_query = select(Artigo.id, Artigo.titulo).order_by(asc(Artigo.id))
 
         artigos = ''  # inicializa a variável
         if data := self.handler.sessao.execute(select_query).fetchall():
@@ -103,15 +103,21 @@ class HTMLAcoes(AcoesInitiallizer):
         """ use : [articleAll_1]"""
 
         # forma de se recuperar somente algumas colunas da tabela
-        select_query = select(Artigo.id, Artigo.titulo)
+        select_query = select(Artigo.id, Artigo.titulo).order_by(asc(Artigo.id))
 
         if data := self.handler.sessao.execute(select_query).fetchall():
             self.data = [Artigo(id=a[0], titulo=a[1]) for a in data]
+
+        # recupera o artigo 1, que será o artigo exibido na página principal
+        select_query = select(Artigo).filter_by(id=1)
+
+        artigo = self.handler.sessao.execute(select_query).scalar_one()
 
         self.handler.sucesso = templates.TemplateResponse(
             "artigos/landing_page_artigos.html",
             {
                 "request": self.handler.request,
-                "artigos": self.data
+                "artigos": self.data,
+                "artigo": artigo
             }
         )

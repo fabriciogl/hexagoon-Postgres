@@ -21,7 +21,7 @@
     <script src="https://cdn.jsdelivr.net/npm/@editorjs/marker@latest"></script><!-- Marker -->
     <script src="https://cdn.jsdelivr.net/npm/@editorjs/inline-code@latest"></script><!-- Inline Code -->
     <script async src="/estaticos/js/artigo.js"></script>
-    <title>HexSaturn</title>
+    <title>Hexagoon</title>
 </head>
 <body>
 <h3 class="text-black-50 text-center">{% block title %}{% endblock %}</h3>
@@ -61,9 +61,14 @@
                    style="display: none" id="pa" data-protected="false">
             <div class=>{% block listaArtigos %}{% endblock %}</div>
         </div>
-        <div class="card col-10 px-2">
+        <div class="card col-9 px-2">
             <div class="card-text">
                 <div id="editorjs"></div>
+            </div>
+        </div>
+                <div class="col-1 px-2">
+            <div class="card-text">
+                <p id="alert"></p>
             </div>
         </div>
     </div>

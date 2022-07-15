@@ -71,16 +71,6 @@ async function fazerLogin(){
     }
 }
 
-async function showHideEditor(){
-    const editor = document.querySelector('.card');
-
-    if (editor.style.display === 'none'){
-        editor.style.display = 'block';
-    } else {
-        editor.style.display = 'none';
-    }
-}
-
 const editor = new EditorJS({
     /**
      * Wrapper of Editor
@@ -248,9 +238,15 @@ async function updateArtigo(){
 
 }
 
-async function createArtigo(){
+async function enviarArtigo(){
 
-    const savedData = await editor.save();
+    let savedData;
+    try{
+        savedData = await editor.save();
+    } catch {
+        alert('Desproteja o artigo para salvá-lo.')
+        return
+    }
     const token = localStorage.getItem("jwt");
 
     const artigo_response = await fetch(`http://0.0.0.0:8000/artigo`, {
@@ -268,41 +264,12 @@ async function createArtigo(){
 
 }
 
+async function createArtigo(){
 
-// async function criarArtigo(){
-//
-//     const token = localStorage.getItem("jwt");
-//     const titulo = document.querySelector('#tna').value;
-//     const corpo = document.querySelector('#na').value;
-//
-//     const artigo_response = await fetch(`https://hexagoon-ev3arw55ca-ue.a.run.app/artigo`, {
-//         method: 'POST',
-//         headers: {
-//             'Content-Type': 'application/json',
-//             'Authorization': `Bearer ${token}`
-//         },
-//         body: JSON.stringify({
-//             "titulo": titulo,
-//             "corpo": corpo
-//         })
-//     });
-//
-//     if (!artigo_response.ok) {
-//         const resposta = await artigo_response.json();
-//         const p = document.createElement("p");
-//         const alerta = document.createTextNode(`Falha na criação do artigo! ${resposta['detail']}`);
-//         p.appendChild(alerta); //adiciona o nó de texto à nova div criada
-//         document.querySelector('#navigation').appendChild(p);
-//     }
-//
-//     if (artigo_response.ok){
-//
-//         const resposta = await artigo_response.json();
-//         const li = document.createElement("li");
-//         const a = document.createElement("a");
-//         a.href = `/hexagoon/artigo/${resposta.id}`;
-//         a.innerText = resposta.titulo;
-//         li.appendChild(a); //adiciona o nó de texto à nova div criada
-//         document.querySelector('ul').appendChild(li);
-//     }
-// }
+    // alterar o conteúdo do editor
+    const newContent = {"blocks": [{"data": {"level": 2, "text": "Novo Artigo"}, "type": "header"}]}
+    editor.render(newContent);
+
+    document.querySelector('#ua').value = "Enviar Artigo"
+    document.querySelector('#ua').onclick = enviarArtigo;
+}
