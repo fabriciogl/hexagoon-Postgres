@@ -6,7 +6,6 @@ from pydantic.main import BaseModel
 from sqlalchemy import Boolean, Column, ForeignKey, Integer, String, DateTime, func, select, create_engine, event, JSON
 from sqlalchemy.engine import Engine
 from sqlalchemy.orm import relationship, declared_attr, declarative_base, sessionmaker, Session, with_loader_criteria
-from sqlalchemy_utils import database_exists, create_database
 from starlette.requests import Request
 
 from config import settings
@@ -171,9 +170,6 @@ class SQLSincrono:
                 f"{settings.db_driver}{settings.db_user}:{settings.db_pass}@{settings.db_address}",
                 json_serializer=lambda obj: json.dumps(obj, ensure_ascii=False)
             )
-            # cria um banco de dados caso não exista
-            if not database_exists(engine.url):
-                create_database(engine.url)
 
             SQLSincrono.engine = engine
 

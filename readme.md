@@ -1,40 +1,72 @@
-## 1
+## 1 CLONE THE PROJECT
 
 -> GIT Clone https://github.com/fabriciogl/hexagoon.git
 
-## 2
+## 2 POETRY
 
 --> Having python 3.10 installed, use ``` pip install poetry ```
 
-## 3
+## 4 INSTALL PACKAGES
 
 --> Inside the root app folder run ``` poetry install ```
 
-## 4
+## 4 SECRETS
 
 --> create a ```.secrets.toml``` file with the following content inside the root folder, replacing the password for each enviroment:
 
-<code> 
-[default] <br>
-root_senha = "cookies" <br>
-db_pass = "secret" <br>
-hash_1 = "3aabce021b58ee1f052484dc6787de8556d308b8" <br>
-hash_2 = "HS256" <br>
-[production] <br> 
-root_senha = "cookies" <br>
-db_pass = "secret"<br>
-hash_1 = "3aabce021b58ee<br>1f052484dc6787de8556d308b8" <br>
-hash_2 = "HS256" <br>
-[development] <br>
-root_senha = "cookies" <br>
-db_pass = "secret" <br>
-hash_1 = "3aabce021b58ee1f052484dc6787de8556d308b8" <br>
-hash_2 = "HS256" <br>
-[testing] <br>
-root_senha = "cookies" <br>
-db_pass = "secret" <br>
-hash_1 = "3aabce021b58ee1f052484dc6787de8556d308b8" <br>
-hash_2 = "HS256" 
+--> replace the values with your own settings  
+--> ``` [default] ``` is mandatory, even if you don't use as an environment.    
+--> ``` [production] [development] [testing] ``` are used when necessary  
+
+<code>
+[default]<br/>  
+root_pass = "cookies" <br/>  
+db_pass = "secret" <br/>  
+dns = "oracleService" <br/>  
+jwt_hash = "longHash" <br/>  
+jwt_algo = "HS256" <br/>  
+root_user = "" <br/>  
+root_email = "" <br/>  
+root_role = "root" <br/>  
+db_driver = "" <br/>  
+db_user = "" <br/>  
+db_address = "" <br/>  
+[production] <br/>  
+root_pass = "cookies" <br/>  
+db_pass = "secret" <br/>  
+dns = "oracleService"  <br/>  
+jwt_hash = "longHash" <br/>  
+jwt_algo = "HS256" <br/>  
+root_user = "" <br/>  
+root_email = "" <br/>  
+root_role = "root" <br/>  
+db_driver = "" <br/>  
+db_user = "" <br/>  
+db_address = "" <br/>  
+[development] <br/>  
+root_pass = "cookies" <br/>  
+db_pass = "secret" <br/>  
+dns = "oracleService"  <br/>  
+jwt_hash = "longHash" <br/>  
+jwt_algo = "HS256" <br/>  
+root_user = "" <br/>  
+root_email = "" <br/>  
+root_role = "root" <br/>  
+db_driver = "" <br/>  
+db_user = "" <br/>  
+db_address = "" <br/>  
+[testing] <br/>  
+root_pass = "cookies" <br/>  
+db_pass = "secret" <br/>  
+dns = "oracleService"  <br/>  
+jwt_hash = "longHash" <br/>  
+jwt_algo = "HS256" <br/>  
+root_user = "" <br/>  
+root_email = "" <br/>  
+root_role = "root" <br/>  
+db_driver = "" <br/>  
+db_user = "" <br/>  
+db_address = "" <br/>  
 </code>
 
 
@@ -65,3 +97,7 @@ hash_2 = "HS256"
 --> stopping your app
 
 stop pycharm run/debug server and ``` docker stop postgres ```
+
+--> restarting your app
+
+``` docker start postgres ``` and start pycharm run/debug server

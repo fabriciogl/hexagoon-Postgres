@@ -35,8 +35,8 @@ def valida_token(
     try:
         payload = jwt.decode(
             jwt=token,
-            key=settings.hash_1,
-            algorithms=[settings.hash_2]
+            key=settings.jwt_hash,
+            algorithms=[settings.jwt_algo]
         )
         _id: str = payload.get('sub')
         ip: str = payload.get('on')

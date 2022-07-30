@@ -6,5 +6,5 @@ def test_config_env():
     assert settings.root_user
     assert settings.root_email
     assert settings.root_senha
-    assert settings.hash_1
-    assert settings.hash_2
+    assert settings.jwt_algo
+    assert settings.jwt_hash

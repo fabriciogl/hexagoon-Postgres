@@ -29,8 +29,8 @@ class AutenticacaoAcoes(AcoesInitiallizer):
         data = {"sub": self.handler.usuario.id, "on": ip, "exp": expire, 'roles': [a.role.sigla for a in self.handler.usuario.a_roles]}
         encoded_jwt = jwt.encode(
             payload=data,
-            key=settings.hash_1,
-            algorithm=settings.hash_2,
+            key=settings.jwt_hash,
+            algorithm=settings.jwt_algo,
         )
         self.handler.sucesso = AutenticacaoOut(token=encoded_jwt, exp=expire, roles=[a.role for a in self.handler.usuario.a_roles])
 
