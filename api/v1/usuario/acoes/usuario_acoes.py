@@ -6,9 +6,6 @@ from sqlalchemy import select
 from api.v1.recursos.acoes_initiallizer import AcoesInitiallizer
 from api.v1.usuario.model.usuario_model import UsuarioIn
 from banco_dados.sql_alchemy.configuracao.data_schema import Usuario
-from templates.Jinja2 import create_templates
-
-templates = create_templates()
 
 class UsuarioAcoes(AcoesInitiallizer):
     # declara o tipo do model
@@ -41,7 +38,8 @@ class UsuarioAcoes(AcoesInitiallizer):
     def acao_4(self):
         """ use : [update_2] """
         # Não é necessário adicionar na sessão, pois ao fazer a query o objeto já foi adicionado
-        # e está em estado de observação.
+        # e está em estado de observação. Os updates no objeto refletem diretamente no banco quando
+        # do commit em função do unity of work implementado pelo SQLAlchemy
         self.data.update(self.model)
 
     def acao_5(self):

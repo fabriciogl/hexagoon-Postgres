@@ -153,12 +153,6 @@ class Role(Base):
         back_populates='precedencia'
     )
 
-
-class Artigo(Base):
-    titulo = Column(String(150))
-    corpo = Column(JSON)
-
-
 class SQLSincrono:
     engine = None
 

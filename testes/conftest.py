@@ -9,7 +9,7 @@ from sqlalchemy_utils import database_exists, drop_database, create_database
 from starlette.testclient import TestClient
 
 from banco_dados.sql_alchemy.configuracao.data_schema import SQLSincrono, Base, Usuario, Role, AsUsuarioRole, \
-    AsRolePrecedencia, Artigo
+    AsRolePrecedencia
 from main import app
 
 
@@ -55,12 +55,6 @@ def load_data(setup_db):
     as_role_precedencia_2 = AsRolePrecedencia(sub_role=role_user, precedencia=role_root)
     as_role_precedencia_3 = AsRolePrecedencia(sub_role=role_user, precedencia=role_admin)
     session.add_all([as_role_precedencia_1, as_role_precedencia_2, as_role_precedencia_3])
-    # Creates artigos
-    artigo1 = Artigo(titulo='Dança dos Lobos',
-                     corpo=json.dumps('Dançar com um lobo pode ser a última dança ta tua vida.'))
-    artigo2 = Artigo(titulo='Dança dos Gatos', corpo=json.dumps('Dançar com um gato pode ser arriscado.'))
-    artigo3 = Artigo(titulo='Dança dos Coelhos', corpo=json.dumps('Dançar com um coelho pode ser interessante.'))
-    session.add_all([artigo1, artigo2, artigo3])
     session.commit()
 
     yield session

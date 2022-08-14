@@ -2,7 +2,7 @@
 
 from sqlalchemy import select
 
-from banco_dados.sql_alchemy.configuracao.data_schema import AsRolePrecedencia, AsUsuarioRole, Artigo, Usuario, Role
+from banco_dados.sql_alchemy.configuracao.data_schema import AsRolePrecedencia, AsUsuarioRole, Usuario, Role
 
 
 def test_usuario(load_data):
@@ -25,7 +25,3 @@ def test_as_usuario_role(load_data):
 
 def test_as_role_precedencia(load_data):
     assert len(load_data.query(AsRolePrecedencia).all()) == 3
-
-
-def test_artigos(load_data):
-    assert len(load_data.query(Artigo).all()) == 3

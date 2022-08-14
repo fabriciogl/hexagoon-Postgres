@@ -28,4 +28,4 @@ class SQLUpdateException(HTTPException):
 class SQLDeleteException(HTTPException):
 
     def __init__(self, _id: str):
-        super().__init__(422, f'Objeto sob id {_id} não encontrado.')
+        super().__init__(422, f'Erro ao deletar Objeto sob id {_id}.')

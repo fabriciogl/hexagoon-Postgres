@@ -9,7 +9,7 @@ from typing import Callable, Union, re as t_re, Optional
 from pydantic import BaseModel
 from sqlalchemy.exc import IntegrityError, DataError
 
-from api.v1.recursos.basic_exceptions.sql_exceptions import SQLCreateException
+from api.v1.recursos.basic_exceptions.sql_exceptions import SQLCreateException, SQLDeleteException
 from api.v1.recursos.response_handler import ResponseHandler
 
 
@@ -76,8 +76,21 @@ class AcoesInitiallizer(ABC):
 
 
 
-    def encerra_create_update(self):
-        """ use : [create_999, update_999] """
+    def encerra_update(self):
+        """ use : [update_999] """
+        try:
+            self.handler.sessao.flush()
+        except IntegrityError:
+            raise SQLCreateException()
+
+        except DataError:
+            raise SQLCreateException()
+        # no caso do update é necessário atualizar o objeto
+        self.handler.sessao.refresh(self.data)
+        self.handler.sucesso = self.data
+
+    def encerra_create(self):
+        """ use : [create_999] """
         try:
             self.handler.sessao.flush()
         except IntegrityError:
@@ -92,7 +105,14 @@ class AcoesInitiallizer(ABC):
         """ use : [softdelete_999] """
 
         self.handler.sessao.add(self.data)
-        self.handler.sessao.flush()
+        try:
+            self.handler.sessao.flush()
+        except IntegrityError:
+            raise SQLDeleteException(self._id)
+
+        except DataError:
+            raise SQLDeleteException(self._id)
+
 
         self.handler.sucesso = {'resultado': 'Conteúdo deletado.'}
 
